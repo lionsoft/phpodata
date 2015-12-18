@@ -24,8 +24,8 @@ http://habrahabr.ru/post/267811/
 
 2. Sample of geting metadata 
    
-   http://SERVER/odata-example/odata.svc/$metadata
+   http://SERVER/odata.svc/$metadata
 
 3. Sample of getting data 
    
-   http://SERVER/odata-example/odata.svc/Products?$format=json&$filter=id%20le%20200&$inlinecount=allpages&$top=5&$skip=2
+   http://SERVER/odata.svc/Products?$format=json&$filter=id%20le%20200&$inlinecount=allpages&$top=5&$skip=2

@@ -5,6 +5,12 @@ use POData\OperationContext\HTTPRequestMethod;
 use POData\OperationContext\IHTTPRequest;
 use POData\OperationContext\Web\IncomingRequest;
 
+// lion: fixing the absent of the $_SERVER['REQUEST_SCHEME']
+if (!isset($_SERVER['REQUEST_SCHEME'])) {
+    $_SERVER['REQUEST_SCHEME'] = "http";
+}
+//--
+
 class RequestAdapter extends IncomingRequest implements IHTTPRequest
 {
     protected $request;
@@ -21,9 +27,7 @@ class RequestAdapter extends IncomingRequest implements IHTTPRequest
      */
     public function getRawUrl()
     {
-        // todo: lion
-     //   return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI'];
-        return 'http' . '://' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI'];
+        return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . '/' . $_SERVER['REQUEST_URI'];
     }
 
     /**

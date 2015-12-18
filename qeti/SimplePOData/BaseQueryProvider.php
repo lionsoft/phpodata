@@ -13,6 +13,9 @@ use POData\Providers\Expression\MySQLExpressionProvider;
 use POData\Providers\Query\QueryType;
 use POData\Providers\Query\QueryResult;
 
+// lion: 
+use POData\OperationContext\HTTPRequestMethod;
+
 abstract class BaseQueryProvider implements IQueryProvider
 {
     /**
@@ -211,7 +214,17 @@ abstract class BaseQueryProvider implements IQueryProvider
         ResourceSet $resourceSet,
         KeyDescriptor $keyDescriptor
     ) {
-        return $this->getResource($resourceSet, $keyDescriptor);
+        // lion:
+        if ($_SERVER['REQUEST_METHOD'] == HTTPRequestMethod::DELETE()) {
+            $res = $this->getResource($resourceSet, $keyDescriptor);
+            if ($res != null){
+                // Delete object if found
+
+            }
+            return $res != null;
+        }
+        // --
+        return $this->getResource($resourceSet, $keyDescriptor);    
     }
 
     /**

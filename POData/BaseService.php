@@ -222,9 +222,9 @@ abstract class BaseService implements IRequestHandler, IService
                 return;
             }
 // ----
-            if ($requestMethod != HTTPRequestMethod::GET()) {
-                throw ODataException::createNotImplementedError(Messages::onlyReadSupport($requestMethod));
-            }          
+//            if ($requestMethod != HTTPRequestMethod::GET()) {
+//                throw ODataException::createNotImplementedError(Messages::onlyReadSupport($requestMethod));
+//            }          
             $uriProcessor = UriProcessor::process($this);
             $request = $uriProcessor->getRequest();
             $this->serializeResult($request, $uriProcessor);

@@ -22,6 +22,9 @@ use POData\UriProcessor\QueryProcessor\OrderByParser\InternalOrderByInfo;
 use POData\Providers\Query\QueryResult;
 use POData\Providers\Query\QueryType;
 
+// lion: 
+use POData\OperationContext\HTTPRequestMethod;
+
 /**
  * Class ProvidersWrapper
  *
@@ -858,6 +861,12 @@ class ProvidersWrapper
     ) {
         if (is_null($entityInstance)) {
             throw ODataException::createResourceNotFoundError($resourceSet->getName());
+        }
+
+// lion:
+
+        if ($_SERVER['REQUEST_METHOD'] == HTTPRequestMethod::DELETE()) {
+            return;
         }
 
         $entityName = $resourceSet->getResourceType()->getInstanceType()->getName();

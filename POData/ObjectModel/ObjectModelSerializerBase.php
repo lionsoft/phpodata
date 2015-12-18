@@ -17,6 +17,9 @@ use POData\Common\InvalidOperationException;
 use POData\Common\ODataException;
 use POData\Common\Messages;
 
+// lion: 
+use POData\OperationContext\HTTPRequestMethod;
+
 /**
  * Class ObjectModelSerializerBase
  * @package POData\ObjectModel
@@ -122,6 +125,11 @@ class ObjectModelSerializerBase
      */
     protected function getEntryInstanceKey($entityInstance, ResourceType $resourceType, $containerName)
     {
+        // lion:
+        if ($_SERVER['REQUEST_METHOD'] == HTTPRequestMethod::DELETE()) {
+            return null;
+        }
+        // ---
         $keyProperties = $resourceType->getKeyProperties();
         $this->assert(count($keyProperties) != 0, 'count($keyProperties) != 0');
         $keyString = $containerName . '(';

@@ -20,6 +20,9 @@ use POData\Providers\Metadata\Type\DateTime;
 use POData\Common\ODataException;
 use POData\Common\Messages;
 
+// lion: 
+use POData\OperationContext\HTTPRequestMethod;
+
 /**
  * Class ObjectModelSerializer
  * @package POData\ObjectModel
@@ -395,6 +398,16 @@ class ObjectModelSerializer extends ObjectModelSerializerBase
         &$odataEntry, 
         ODataPropertyContent &$odataPropertyContent
     ) {
+
+        // lion:
+        if ($_SERVER['REQUEST_METHOD'] == HTTPRequestMethod::DELETE()) {
+            $odataEntry = (object)array();
+            return;
+        }
+        // ---
+
+
+
         $resourceTypeKind = $resourceType->getResourceTypeKind();
         if (is_null($absoluteUri) == ($resourceTypeKind == ResourceTypeKind::ENTITY)
         ) {
